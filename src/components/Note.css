@@ -1,0 +1,8 @@
+.Note{
+  padding: 20px 30px;
+  border-bottom: 1px solid #555;
+}
+
+.Note h3{
+  margin-top: 0;
+}

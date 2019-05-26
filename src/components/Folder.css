@@ -1,0 +1,39 @@
+.Folder{
+  border-bottom: 1px solid #999;
+}
+
+.Folder a{
+  padding: 15px 0 15px 20px;
+  display: block;
+  text-decoration: none;
+}
+
+.Folder a.active{
+  background-color: goldenrod;
+}
+
+.Folder a.active:after{
+  content: ' ≫';
+}
+
+.add-folder{
+  display: block;
+  text-align: center;
+  padding: 15px;
+  border-radius: 3px;
+  background-color: cadetblue;
+  color: #FFF;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bold;
+  letter-spacing: 1px;
+  transition: background-color 0.25s ease-in-out;
+}
+
+.add-folder:hover{
+  background-color: blue;
+}
+
+.folder-title{
+  text-align: center;
+}

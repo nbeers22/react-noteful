@@ -1,0 +1,57 @@
+import React, { Component } from 'react';
+import { Route, withRouter } from 'react-router-dom';
+import NoteList from './NoteList.js';
+import FolderNotes from './FolderNotes.js';
+import Note from './Note.js';
+
+class Main extends Component {
+
+  getNote(){
+    const noteId = this.props.location.pathname.split('/note/')[1];
+    const note = this.props.notes.find( note => (
+      note.id === noteId
+    ));
+    return (
+      <Note
+        id={note.id}
+        name={note.name}
+        content={note.content}
+        route={this.props.location.pathname}
+        modified={note.modified} />
+    )
+  }
+
+  render() {
+
+    const { notes } = this.props;
+    const path = this.props.location.pathname
+
+    return (
+      <main className="Main">
+        <Route
+          exact path='/'
+          render={() => (
+            <NoteList notes={notes} route={path} />
+          )}
+        />
+        <Route
+          path='/folder/:folderId'
+          render={() => (
+            <FolderNotes 
+              notes={notes}
+              location={this}
+              route={path} />
+          )}
+        />
+        <Route
+          exact path='/note/:noteId'
+          render={() => (
+            this.getNote()
+          )}
+        />
+      </main>
+    )
+  }
+}
+
+export default withRouter(Main);
