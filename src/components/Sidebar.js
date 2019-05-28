@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Route, Link, withRouter } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import FolderList from './FolderList';
 import SingleNoteSidebar from './SingleNoteSidebar';
 
 class Sidebar extends Component {
   render() {
 
-    const { folders,notes } = this.props;
+    const { history } = this.props;
     const currentNoteId = this.props.location.pathname.split('/note/')[1];
 
     return (
@@ -14,13 +14,13 @@ class Sidebar extends Component {
         <Route
           exact path='/'
           render={() => (
-            <FolderList folders={folders} />
+            <FolderList />
           )}
         />
         <Route
           path='/folder/:folderId'
           render={() => (
-            <FolderList folders={folders} />
+            <FolderList />
           )}
         />
         <Route
@@ -28,9 +28,7 @@ class Sidebar extends Component {
           render={() => (
             <SingleNoteSidebar
               currentNoteId={currentNoteId}
-              notes={notes}
-              folders={folders}
-              goBack={() => this.props.history.goBack()} />
+              goBack={() => history.goBack()} />
           )}
         />
       </aside>

@@ -3,12 +3,16 @@ import { Route, withRouter } from 'react-router-dom';
 import NoteList from './NoteList.js';
 import FolderNotes from './FolderNotes.js';
 import Note from './Note.js';
+import FolderNoteContext from './FolderNoteContext.js'
 
 class Main extends Component {
 
+  static contextType = FolderNoteContext;
+
   getNote(){
+    const { notes } = this.context.contextValue;
     const noteId = this.props.location.pathname.split('/note/')[1];
-    const note = this.props.notes.find( note => (
+    const note = notes.find( note => (
       note.id === noteId
     ));
     return (
@@ -22,8 +26,6 @@ class Main extends Component {
   }
 
   render() {
-
-    const { notes } = this.props;
     const path = this.props.location.pathname
 
     return (
@@ -31,14 +33,13 @@ class Main extends Component {
         <Route
           exact path='/'
           render={() => (
-            <NoteList notes={notes} route={path} />
+            <NoteList route={path} />
           )}
         />
         <Route
           path='/folder/:folderId'
           render={() => (
-            <FolderNotes 
-              notes={notes}
+            <FolderNotes
               location={this}
               route={path} />
           )}

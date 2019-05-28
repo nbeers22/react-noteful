@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Folder from './Folder.js';
+import FolderNoteContext from './FolderNoteContext.js'
 
 export default class FolderList extends Component {
 
+  static contextType = FolderNoteContext;
+
   getFolders(){
-    return this.props.folders.map((folder, index) => (
+    const { folders } = this.context.contextValue;
+
+    return folders.map((folder, index) => (
       <Folder key={index} id={folder.id} name={folder.name} />
     ));
   }

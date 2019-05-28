@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import Note from './Note.js';
+import FolderNoteContext from './FolderNoteContext.js'
 
 export default class NoteList extends Component {
 
+  static contextType = FolderNoteContext;
+
   getNotes() {
-    return this.props.notes.map((note, index) => (
+    const { notes } = this.context.contextValue;
+
+    return notes.map((note, index) => (
       <Note
         key={index}
         id={note.id}

@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, withRouter } from 'react-router-dom';
+import FolderNoteContext from './FolderNoteContext.js'
 import './Note.css';
 
-export default class Note extends Component {
+class Note extends Component {
+
+  static contextType = FolderNoteContext;
 
   convertModifiedIntoDate(){
     const time = new Date(this.props.modified)
@@ -30,10 +33,22 @@ export default class Note extends Component {
             )}
           />
           <aside>
-            <button className="delete">Delete Note</button>
+            <button
+              className="delete"
+              onClick={() => {
+                this.context.contextValue.deleteNote(id)
+                if(route.includes('/note/')){
+                  this.props.history.push('/')
+                }
+              }}
+            >
+              Delete Note
+            </button>
           </aside>
         </div>
       </div>
     )
   }
 }
+
+export default withRouter(Note)

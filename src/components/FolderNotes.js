@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import Note from './Note.js'
+import Note from './Note.js';
+import FolderNoteContext from './FolderNoteContext.js';
 
 export default class FolderNotes extends Component {
+
+  static contextType = FolderNoteContext;
 
   getFolderId(){
     const { pathname } = this.props.location.props.location;
@@ -9,8 +12,10 @@ export default class FolderNotes extends Component {
   }
 
   getFolderNotes(){
+    const { notes } = this.context.contextValue;
     const folderId = this.getFolderId();
-    return this.props.notes.map( (note,index) => (
+    
+    return notes.map( (note,index) => (
       note.folderId === folderId && 
         <Note 
           key={index}

@@ -1,30 +1,35 @@
-import React from 'react';
+import React, { Component } from 'react';
+import FolderNoteContext from './FolderNoteContext.js';
 
-const SingleNoteSidebar = (props) => {
-  
-  const getNoteById = (noteId) => {
-    return props.notes.find( note => note.id === noteId);
+export default class SingleNoteSidebar extends Component {
+
+  static contextType = FolderNoteContext;
+
+  getNoteById(noteId){
+    const { notes } = this.context.contextValue;
+    return notes.find(note => note.id === noteId);
   }
 
-  const getCurrentFolderId = () => {
-    const currentNote = getNoteById(props.currentNoteId);
+  getCurrentFolderId(){
+    const currentNote = this.getNoteById(this.props.currentNoteId);
     return currentNote.folderId;
   }
 
-  const showCurrentFolder = () => {
-    const folderId = getCurrentFolderId();
-    const currentFolder = props.folders.find( folder => (
+  showCurrentFolder(){
+    const { folders } = this.context.contextValue;
+    const folderId = this.getCurrentFolderId();
+    const currentFolder = folders.find(folder => (
       folder.id === folderId
     ));
     return currentFolder.name;
   }
 
-  return (
-    <div className="SingleNoteSidebar">
-      <a className="add-folder" onClick={props.goBack}>&#8592; Go Back</a>
-      <h3 className="folder-title">{showCurrentFolder()}</h3>
-    </div>
-  )
+  render() {
+    return (
+      <div className="SingleNoteSidebar">
+        <a className="add-folder" onClick={this.props.goBack}>&#8592; Go Back</a>
+        <h3 className="folder-title">{this.showCurrentFolder()}</h3>
+      </div>
+    )
+  }
 }
-
-export default SingleNoteSidebar;
