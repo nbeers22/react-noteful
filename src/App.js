@@ -8,23 +8,44 @@ import './App.css';
 
 export default class App extends Component {
 
-  state = {
-    store: store
+  constructor(){
+    super();
+    this.getData();
+    this.state = {
+      store: {
+        folders: [],
+        notes: []
+      }
+    }
+  }
+
+  getData(){
+    const urls = [
+      'http://localhost:9090/folders',
+      'http://localhost:9090/notes'
+    ];
+    Promise.all(urls.map(url => fetch(url)))
+      .then(responses => Promise.all(
+        responses.map(response => response.json())
+      ))
+      .then(data => {
+        const store = {};
+        store.folders = [...data[0]];
+        store.notes = [...data[1]];
+        this.setState({
+          store: store
+        });
+      })
   }
 
   deleteNote = (noteID) => {
-    const { notes, folders } = this.state.store;
-
-    const newNotes = notes.filter( note => (
-      note.id !== noteID
-    ));
-
-    this.setState({
-      store: {
-        folders: folders,
-        notes: newNotes
-      }
+    fetch(`http://localhost:9090/notes/${noteID}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json'
+      },
     })
+    .then(response => this.getData())
   }
 
   render(){
