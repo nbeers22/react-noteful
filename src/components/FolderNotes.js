@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Note from './Note.js';
 import FolderNoteContext from './FolderNoteContext.js';
 
@@ -31,6 +32,11 @@ export default class FolderNotes extends Component {
     return (
       <div className="FolderNotes">
         {this.getFolderNotes()}
+        <div className="Note">
+          <button>
+            <Link to="/add-note">Add Note+</Link>
+          </button>
+        </div>
       </div>
     )
   }

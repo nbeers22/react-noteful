@@ -18,6 +18,12 @@ class Sidebar extends Component {
           )}
         />
         <Route
+          path='/add-folder'
+          render={() => (
+            <FolderList />
+          )}
+        />
+        <Route
           path='/folder/:folderId'
           render={() => (
             <FolderList />

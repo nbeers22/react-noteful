@@ -4,6 +4,8 @@ import NoteList from './NoteList.js';
 import FolderNotes from './FolderNotes.js';
 import Note from './Note.js';
 import FolderNoteContext from './FolderNoteContext.js'
+import AddFolder from './AddFolder.js';
+import AddNote from './AddNote.js';
 
 class Main extends Component {
 
@@ -35,6 +37,14 @@ class Main extends Component {
           render={() => (
             <NoteList route={path} />
           )}
+        />
+        <Route
+          path='/add-folder'
+          component={AddFolder}
+        />
+        <Route
+          path='/add-note'
+          component={AddNote}
         />
         <Route
           path='/folder/:folderId'

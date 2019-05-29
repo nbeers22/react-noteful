@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Link, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import FolderNoteContext from './FolderNoteContext.js'
 import './Note.css';
 
@@ -49,6 +50,13 @@ class Note extends Component {
       </div>
     )
   }
+}
+
+Note.propTypes = {
+  name: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  route: PropTypes.string.isRequired,
 }
 
 export default withRouter(Note)

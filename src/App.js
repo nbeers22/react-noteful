@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
-import store from './store.js'
+import { Link, withRouter } from 'react-router-dom';
 import Sidebar from './components/Sidebar.js';
 import Main from './components/Main.js';
-import FolderNoteContext from './components/FolderNoteContext.js'
+import FolderNoteContext from './components/FolderNoteContext.js';
+import FolderError from './components/FolderError.js';
+import NoteError from './components/NoteError.js';
 import './App.css';
 
-export default class App extends Component {
+class App extends Component {
 
   constructor(){
     super();
@@ -48,6 +49,46 @@ export default class App extends Component {
     .then(response => this.getData())
   }
 
+  addFolder = (folderName) => {
+    const folderID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    fetch(`http://localhost:9090/folders`, {
+      method: 'POST',
+      body: JSON.stringify({
+        id: folderID,
+        name: folderName
+      }),
+      headers: {
+        'content-type': 'application/json'
+      },
+    })
+    .then(response => {
+      if(!response.ok){
+        alert(`Error: ${response.statusText}`)
+      }else{
+        this.getData();
+        this.props.history.push('/');
+      }
+    });
+  }
+  
+  addNote = (values) => {
+    fetch(`http://localhost:9090/notes`, {
+      method: 'POST',
+      body: JSON.stringify(values),
+      headers: {
+        'content-type': 'application/json'
+      },
+    })
+    .then(response => {
+      if(!response.ok){
+        alert(`Error: ${response.statusText}`)
+      }else{
+        this.getData();
+        this.props.history.push('/');
+      }
+    });
+  }
+
   render(){
     const { folders, notes } = this.state.store;
     const contextValue = {
@@ -55,7 +96,13 @@ export default class App extends Component {
       notes: notes,
       deleteNote: (noteID) => {
         this.deleteNote(noteID)
-      }
+      },
+      addFolder: (folderName) => {
+        this.addFolder(folderName)
+      },
+      addNote: (values) => {
+        this.addFolder(values)
+      },
     }
 
     return (
@@ -64,10 +111,16 @@ export default class App extends Component {
           <header className="header">
             <Link to="/"><h1>Noteful</h1></Link>
           </header>
-          <Sidebar />
-          <Main />
+          <FolderError>
+            <Sidebar />
+          </FolderError>
+          <NoteError>
+            <Main />
+          </NoteError>
         </div>
       </FolderNoteContext.Provider>
     );
   }
 }
+
+export default withRouter(App);

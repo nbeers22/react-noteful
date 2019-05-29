@@ -5,6 +5,12 @@ const FolderNoteContext = React.createContext({
   notes: null,
   deleteNote: () => {
 
+  },
+  addFolder: () => {
+
+  },
+  addNote: () => {
+
   }
 })
 
