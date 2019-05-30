@@ -12,7 +12,7 @@ export default class AddFolder extends Component {
 
   newFolder = (event) => {
     event.preventDefault();
-    const value = this.nameInput.current.value;
+    const { value } = this.nameInput.current;
     if(value.length > 0){
       document.querySelector('#error').innerText = "";
       this.context.contextValue.addFolder(value);

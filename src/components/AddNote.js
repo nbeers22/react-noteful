@@ -51,6 +51,10 @@ export default class AddNote extends Component {
       fieldErrors.name = 'Note name is required';
       hasError = true;
     }
+    if (fieldValue.length > 0 && fieldValue.length < 3) {
+      fieldErrors.name = 'Note name must be at least 3 characters';
+      hasError = true;
+    }
     this.setState({
       validationMessages: fieldErrors,
       noteNameValid: !hasError
@@ -64,6 +68,10 @@ export default class AddNote extends Component {
     fieldValue = fieldValue.trim();
     if (fieldValue.length === 0) {
       fieldErrors.name = 'Note content is required';
+      hasError = true;
+    }
+    if (fieldValue.length > 0 && fieldValue.length < 3) {
+      fieldErrors.name = 'Note content must be at least 3 characters';
       hasError = true;
     }
     this.setState({
