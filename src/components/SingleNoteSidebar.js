@@ -27,7 +27,7 @@ export default class SingleNoteSidebar extends Component {
   render() {
     return (
       <div className="SingleNoteSidebar">
-        <a className="add-folder" onClick={this.props.goBack}>&#8592; Go Back</a>
+        <button className="add-folder" onClick={this.props.goBack}>&#8592; Go Back</button>
         <h3 className="folder-title">{this.showCurrentFolder()}</h3>
       </div>
     )

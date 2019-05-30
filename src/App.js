@@ -35,9 +35,8 @@ class App extends Component {
         const store = {};
         store.folders = [...data[0]];
         store.notes = [...data[1]];
-        console.log(store)
         this.setState({
-          store: store
+          store
         });
       })
   }
@@ -76,11 +75,11 @@ class App extends Component {
   
   addNote = (values) => {
     const { folderID, id, noteContent, noteName } = values;
-    const date = new Date;
+    const date = new Date();
     const postObj = {
       folderId: folderID,
       content: noteContent,
-      // id: id,
+      id: id,
       name: noteName,
       modified: date.toLocaleString()
     }

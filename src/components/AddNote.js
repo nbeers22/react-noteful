@@ -95,7 +95,6 @@ export default class AddNote extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log(event)
 
     this.state.formValid === true
       ? this.newNote()
@@ -124,17 +123,17 @@ export default class AddNote extends Component {
         <h1>Add New Note</h1>
         <form onSubmit={event => this.handleSubmit(event)} className="add-note-form">
           <div className="form-group">
-            <label htmlFor="note-name">Note Name</label>
+            <label htmlFor="note-name">Note Name</label><br/>
             <input type="text" id="note-name" onChange={e => this.updateNoteName(e.target.value)} />
             <ValidationError hasError={!this.state.noteNameValid} message={this.state.validationMessages.noteName} />
           </div>
           <div className="form-group">
-            <label htmlFor="note-content">Note Content</label>
+            <label htmlFor="note-content">Note Content</label><br/>
             <textarea id="note-content" onChange={e => this.updateNoteContent(e.target.value)}></textarea>
             <ValidationError hasError={!this.state.noteContentValid} message={this.state.validationMessages.noteContent} />
           </div>
           <div className="form-group">
-            <label htmlFor="folder-name">Folder Name</label>
+            <label htmlFor="folder-name">Folder Name</label><br/>
             <select name="folder-name" id="folder-name" defaultValue="Select folder" onChange={e => this.updateFolderID(e.target.value)}>
               <option value="Select folder" disabled>Select folder</option>
               {this.getFolderNames()}

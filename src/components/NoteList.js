@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Note from './Note.js';
-import FolderNoteContext from './FolderNoteContext.js'
+import FolderNoteContext from './FolderNoteContext.js';
+import AddNoteButton from './AddNoteButton.js';
 
 export default class NoteList extends Component {
 
@@ -26,6 +27,7 @@ export default class NoteList extends Component {
     return (
       <div className="NoteList">
         {this.getNotes()}
+        <AddNoteButton />
       </div>
     )
   }

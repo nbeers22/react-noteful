@@ -6,3 +6,36 @@
 .Note h3{
   margin-top: 0;
 }
+
+.delete{
+  background-color: red;
+  border: 0;
+  padding: 10px 15px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  color: #FFF;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.add-note{
+  background-color: #42a4f4;
+  border: 0;
+  padding: 10px 20px;
+  border-radius: 30px;
+}
+
+.add-note a{
+  text-transform: uppercase;
+  color: #FFF;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.form-group{
+  margin: 20px 0;
+}

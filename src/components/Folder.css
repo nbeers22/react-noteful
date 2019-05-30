@@ -16,6 +16,12 @@
   content: ' ≫';
 }
 
+button.add-folder{
+  width: 100%;
+  font-size: 16px;
+  cursor: pointer;
+}
+
 .add-folder{
   display: block;
   text-align: center;
