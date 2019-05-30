@@ -11,13 +11,15 @@ class App extends Component {
 
   constructor(){
     super();
-    this.getData();
     this.state = {
       store: {
         folders: [],
         notes: []
       }
     }
+  }
+  componentDidMount(){
+    this.getData();
   }
 
   getData(){
@@ -33,6 +35,7 @@ class App extends Component {
         const store = {};
         store.folders = [...data[0]];
         store.notes = [...data[1]];
+        console.log(store)
         this.setState({
           store: store
         });
@@ -72,9 +75,19 @@ class App extends Component {
   }
   
   addNote = (values) => {
+    const { folderID, id, noteContent, noteName } = values;
+    const date = new Date;
+    const postObj = {
+      folderId: folderID,
+      content: noteContent,
+      // id: id,
+      name: noteName,
+      modified: date.toLocaleString()
+    }
+
     fetch(`http://localhost:9090/notes`, {
       method: 'POST',
-      body: JSON.stringify(values),
+      body: JSON.stringify(postObj),
       headers: {
         'content-type': 'application/json'
       },
@@ -101,7 +114,7 @@ class App extends Component {
         this.addFolder(folderName)
       },
       addNote: (values) => {
-        this.addFolder(values)
+        this.addNote(values)
       },
     }
 
