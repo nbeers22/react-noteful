@@ -16,16 +16,16 @@ export default class FolderNotes extends Component {
     const { notes } = this.context.contextValue;
     const folderId = this.getFolderId();
     
-    return notes.map( (note,index) => (
-      note.folderId === folderId && 
-        <Note 
-          key={index}
-          id={note.id}
-          name={note.name}
-          route={this.props.route}
-          modified={note.modified}
-        />
-    ));
+    return notes.map( (note,index) => {
+      return note.folder_id === +folderId && 
+      <Note 
+        key={index}
+        id={note.id}
+        name={note.name}
+        route={this.props.route}
+        modified={note.date_created}
+      />
+    });
   }
 
   render() {

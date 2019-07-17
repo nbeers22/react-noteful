@@ -4,8 +4,8 @@ import FolderList from './FolderList';
 import SingleNoteSidebar from './SingleNoteSidebar';
 
 class Sidebar extends Component {
-  render() {
 
+  render() {
     const { history } = this.props;
     const currentNoteId = this.props.location.pathname.split('/note/')[1];
 

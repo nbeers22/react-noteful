@@ -54,7 +54,7 @@ class Note extends Component {
 
 Note.propTypes = {
   name: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   content: PropTypes.string,
   route: PropTypes.string.isRequired,
 }

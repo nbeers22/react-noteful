@@ -13,22 +13,21 @@ class Main extends Component {
 
   getNote(){
     const { notes } = this.context.contextValue;
-    const noteId = this.props.location.pathname.split('/note/')[1];
+    const noteId = +this.props.location.pathname.split('/note/')[1];
     const note = notes.find( note => (
-      note.id === noteId
+      note.id === +noteId
     ));
-    return (
+    return note &&
       <Note
         id={note.id}
         name={note.name}
         content={note.content}
         route={this.props.location.pathname}
-        modified={note.modified} />
-    )
+        modified={note.date_created} />
   }
 
   render() {
-    const path = this.props.location.pathname
+    const path = this.props.location.pathname;
 
     return (
       <main className="Main">

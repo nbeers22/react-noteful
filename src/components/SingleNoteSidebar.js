@@ -11,8 +11,8 @@ export default class SingleNoteSidebar extends Component {
   }
 
   getCurrentFolderId(){
-    const currentNote = this.getNoteById(this.props.currentNoteId);
-    return currentNote.folderId;
+    const currentNote = this.getNoteById(+this.props.currentNoteId);
+    return currentNote && currentNote.folder_id;
   }
 
   showCurrentFolder(){
@@ -21,7 +21,7 @@ export default class SingleNoteSidebar extends Component {
     const currentFolder = folders.find(folder => (
       folder.id === folderId
     ));
-    return currentFolder.name;
+    return currentFolder && currentFolder.name;
   }
 
   render() {

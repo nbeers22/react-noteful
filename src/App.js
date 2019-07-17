@@ -5,6 +5,7 @@ import Main from './components/Main.js';
 import FolderNoteContext from './components/FolderNoteContext.js';
 import FolderError from './components/FolderError.js';
 import NoteError from './components/NoteError.js';
+import config from './config.js';
 import './App.css';
 
 class App extends Component {
@@ -24,8 +25,8 @@ class App extends Component {
 
   getData(){
     const urls = [
-      'http://localhost:9090/folders',
-      'http://localhost:9090/notes'
+      config.API_ENDPOINT + 'api/folders',
+      config.API_ENDPOINT + 'api/notes'
     ];
     Promise.all(urls.map(url => fetch(url)))
       .then(responses => Promise.all(
@@ -42,7 +43,7 @@ class App extends Component {
   }
 
   deleteNote = (noteID) => {
-    fetch(`http://localhost:9090/notes/${noteID}`, {
+    fetch(config.API_ENDPOINT + `api/notes/${noteID}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -53,7 +54,7 @@ class App extends Component {
 
   addFolder = (folderName) => {
     const folderID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-    fetch(`http://localhost:9090/folders`, {
+    fetch(config.API_ENDPOINT + `api/folders`, {
       method: 'POST',
       body: JSON.stringify({
         id: folderID,
@@ -77,14 +78,14 @@ class App extends Component {
     const { folderID, id, noteContent, noteName } = values;
     const date = new Date();
     const postObj = {
-      folderId: folderID,
+      folder_id: folderID,
       content: noteContent,
       id: id,
       name: noteName,
-      modified: date.toLocaleString()
+      date_created: date.toLocaleString()
     }
 
-    fetch(`http://localhost:9090/notes`, {
+    fetch(config.API_ENDPOINT + `api/notes`, {
       method: 'POST',
       body: JSON.stringify(postObj),
       headers: {
@@ -104,8 +105,8 @@ class App extends Component {
   render(){
     const { folders, notes } = this.state.store;
     const contextValue = {
-      folders: folders,
-      notes: notes,
+      folders,
+      notes,
       deleteNote: (noteID) => {
         this.deleteNote(noteID)
       },
